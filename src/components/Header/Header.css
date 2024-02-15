@@ -1,0 +1,7 @@
+.title{
+    color: var(--text-color);
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    padding: 3% 0;
+}

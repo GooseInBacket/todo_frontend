@@ -1,0 +1,40 @@
+@import url('./vars.css');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--background);
+    transition: all .3s ease-in-out;
+}
+
+#root{
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Kanit', sans-serif;
+}
+
+main{
+    padding: 0 15%;
+    width: 100%;
+}
+
+article{
+    display: flex;
+    flex-direction: column;
+}
+
+.style{
+    cursor: pointer;
+    transition: all .5s;
+}
+
+.style:hover{
+    background-color: var(--accent-hover);
+    box-shadow: 0 0 5px var(--shadow-color);
+    transition: all .5s;
+}

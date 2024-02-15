@@ -1,0 +1,44 @@
+.task-item{
+    padding: 20px 0;
+    list-style-type: none;
+    display: grid;
+    align-items: center;
+    gap: 10px;
+    grid-template-columns: auto 20px 20px;
+    border-bottom: 1px solid var(--accent);
+}
+
+.task-item:last-child{
+    border-bottom: none;
+}
+
+.checkBox{
+    width: 26px;
+    height: 26px;
+}
+
+.task-item:hover .controlButton{
+    display: block;
+}
+
+.controlButton{
+    cursor: pointer;
+    display: none;
+    background-color: unset;
+    border: none;
+}
+
+.bin, .pencel{
+    stroke: var(--pencil-color);
+    transition: .3s;
+}
+
+.bin:hover{
+    stroke: var(--bin-color);
+    transition: .3s;
+}
+
+.pencel:hover{
+    stroke: var(--accent);
+    transition: .3s;
+}

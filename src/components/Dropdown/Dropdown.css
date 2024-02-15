@@ -1,0 +1,76 @@
+.select{
+    position: relative;
+}
+
+.filter{
+    font-size: 12px;
+
+    cursor: pointer;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+
+    color: var(--constant-text-color);
+    border-radius: 5px;
+    background-color: var(--accent);
+    border: 2px solid var(--accent);
+    outline: none;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selectList{
+    z-index: 1;
+
+    display: none;
+    position: absolute;
+    top: 40px;
+
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid var(--accent);
+    flex-direction: column;
+}
+
+.filterItem{
+    cursor: pointer;
+    width: 100%;
+    overflow: hidden;
+    color: var(--accent);
+    padding: 5px 10px;
+    background-color: var(--constant-text-color);
+}
+
+.filterItem:hover{
+    background-color: var(--list-bg-hover);
+}
+
+/* .filter */
+.filter:hover{
+    background-color: var(--accent);
+}
+
+/* .theme */
+.theme{
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--accent);
+
+    display: grid;
+    place-items: center;
+}
+
+.arrow{
+    transition: all .2s ease-in-out;
+}
+
+.look-up{
+    transform: rotate(180deg);
+    transition: all .2s ease-in-out;
+}

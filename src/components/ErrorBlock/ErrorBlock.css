@@ -1,0 +1,36 @@
+.error-block{
+    color: var(--text-color);
+    z-index: 1;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+
+    width: 150px;
+    padding: 10px;
+    border: 2px solid var(--accent); /* red */
+    border-radius: 5px;
+
+    font-size: 10px;
+    background-color: var(--background);
+    animation: onset 5s;
+
+    opacity: 0;
+}
+
+@keyframes onset {
+    0%{
+        opacity: 0;
+    }
+
+    30%{
+        opacity: 1;
+    }
+
+    70%{
+        opacity: 1;
+    }
+
+    100%{
+        opacity: 0;
+    }
+}

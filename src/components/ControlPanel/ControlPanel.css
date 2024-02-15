@@ -1,0 +1,14 @@
+.panel{
+    width: 100%;
+    /* height: 38px; */
+    gap: 10px;
+    display: grid;
+    grid-template-columns: auto 110px 38px;
+}
+
+@media screen and (max-width: 500px){
+    .panel{
+        grid-template-columns: auto 35px;
+        grid-template-rows: auto 35px;
+    }
+}
