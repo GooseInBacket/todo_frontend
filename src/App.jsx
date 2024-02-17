@@ -1,31 +1,13 @@
+import TaskService from './api/taskService.js'
+
 import Header from './components/Header/Header.jsx'
 import ControlPanel from './components/ControlPanel/ControlPanel.jsx'
 import TaskList from './components/TaskList/TaskList.jsx'
 import PopUp from './components/PopUp/PopUp.jsx'
 import AddButton from './components/AddButton/AddButton.jsx'
+import PreLoader from './components/PreLoader/PreLoader.jsx'
 
 import { useEffect, useMemo, useState } from 'react'
-
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJidXNpbmdvb3NlIiwic2NvcGVzIjpbIm1lIiwiaXRlbXMiXSwiZXhwIjoxNzA4MTA1MDY5fQ.8bf5wM3a29wYnraQhdrFOzsmppulgp6s8WVp2vDs4pw"
-
-function fetchData(method, url, body, handler, err){
-  const myHeaders = new Headers();
-
-  myHeaders.append("Authorization", `Bearer ${token}`);
-  myHeaders.append("Accept", 'application/json');
-  myHeaders.append("Content-Type", 'application/json');
-
-  const requestOptions = {
-    method: method,
-    headers: myHeaders,
-    body: body ? JSON.stringify(body) : null
-  };
-
-  fetch(url, requestOptions)
-  .then((response) => response.status >= 400 ? [] : response.json())
-  .then((result) => handler(result))
-  .catch((error) => err(error));
-}
 
 function App() {
   const [tasks, setTask] = useState([]);
@@ -33,9 +15,15 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentEditTask, setEditTask] = useState(null);
   const [addingNewTask, setAddingNewTask] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchData('GET', 'http://127.0.0.1:8000/tasks/?skip=0&limit=100', null, setTask, console.error)
+    async function fetchTask(){ 
+      setLoading(true);
+      setTask(await TaskService.getAll())
+      setLoading(false);
+    }
+    fetchTask()
   }, [])
 
   const filteredTasks = useMemo(() => {
@@ -50,34 +38,25 @@ function App() {
 
   
   function addNewTask(task){
-    fetchData('POST', 'http://127.0.0.1:8000/tasks/', task, console.log, console.error);
-
+    TaskService.add(task);
     setTask([...tasks, task]);
     setAddingNewTask(false);
   }
 
-  function putCompleteTask(taskId){
-    setTask(tasks.map((t) => {
-      if (t.id != taskId) return {...t}
-
-      fetchData('PUT', `http://127.0.0.1:8000/tasks/${taskId}/`, {completed: !t.completed}, console.log, console.error);
-      return {...t, completed : !t.completed}
-    }))
-  }
-
   function removeTask(task){
-    fetchData('DELETE', `http://127.0.0.1:8000/tasks/${task.id}/`, null, console.log, console.error);
+    TaskService.remove(task.id)
     setTask(tasks.filter((t) => t.id != task.id))
   }
 
-  function submitEditTask(task){
+  function updateTask(task, hasTitle = false){
     setTask(tasks.map((t) => {
       if (t.id != task.id) return {...t}
 
-      fetchData('PUT', `http://127.0.0.1:8000/tasks/${task.id}/`, {title: task.title}, console.log, console.error);
-      return {...t, title : task.title}
+      TaskService.update(task.id, task)
+      return task
     }))
-    setEditTask(null);
+
+    if (hasTitle) setEditTask(null);
   }
 
   return (
@@ -86,17 +65,16 @@ function App() {
           <article>
             <Header/>
             <ControlPanel queryHandler={(text) => setSearchQuery(text)} filterHandler={(text) => setFilter(text)}/>
-            <TaskList tasks={filteredAndSearchedTasks} edit={(task) => setEditTask(task)} remove={removeTask} onUpdate={putCompleteTask}/>
+            {isLoading
+              ? <PreLoader/>
+              : <TaskList tasks={filteredAndSearchedTasks} edit={(task) => setEditTask(task)} remove={removeTask} onUpdate={updateTask}/>
+            }
             <AddButton onClick={setAddingNewTask}/>
           </article>
         </main>
-        {
-          addingNewTask ? <PopUp title={'NEW NOTE'} submit={addNewTask} close={() => setAddingNewTask(false)}/> : null
-        }
-        
-        {
-          currentEditTask ? <PopUp title={'EDIT TASK'} task={currentEditTask} submit={submitEditTask} close={() => setEditTask(null)}/> : null
-        }
+
+        { addingNewTask && <PopUp title={'NEW NOTE'} submit={addNewTask} close={() => setAddingNewTask(false)}/> }
+        { currentEditTask && <PopUp title={'EDIT TASK'} task={currentEditTask} submit={(t) => updateTask(t, true)} close={() => setEditTask(null)}/> }
     </>
   )
 }

@@ -1,12 +1,10 @@
 import './CheckBox.css'
 import Mark from './Mark'
 
-import { useState } from 'react'
-
-export default function CheckBox({ taskId, checked, text, onUpdate }) {
+export default function CheckBox({ checked, text }) {
     return (
         <label className="customCheckbox">
-            <input checked={checked} type="checkbox" className="hidden-checkbox" onChange={() => onUpdate(taskId)}/>
+            <input checked={checked} type="checkbox" className="hidden-checkbox" readOnly/>
             <div className="checkbox">
                 <Mark className={"checkmark"}/>
             </div>

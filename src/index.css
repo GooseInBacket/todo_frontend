@@ -38,3 +38,16 @@ article{
     box-shadow: 0 0 5px var(--shadow-color);
     transition: all .5s;
 }
+
+.loadBlock{
+    color: var(--text-color);
+    margin-block: 40px;
+    height: 100px;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}

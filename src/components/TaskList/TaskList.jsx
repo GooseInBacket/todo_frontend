@@ -1,7 +1,6 @@
 import uuid from "react-uuid";
 
 import "./TaskList.css"
-// import EmptySvg from "./Empty.svg";
 import Task from "../Task/Task";
 import EmptySvg from "./EmptySvg";
 
