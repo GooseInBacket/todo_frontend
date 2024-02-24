@@ -1,0 +1,52 @@
+.modal--bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.418);
+
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    place-items: center;
+}
+
+.auth-modal{
+    background-color: var(--background);
+    padding: 18px 30px;
+    border-radius: 10px;
+    width: 400px;
+}
+
+.auth-modal h1{
+    color: var(--text-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modal-block{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-block: 10px;
+}
+
+.modal-auth-button{
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    padding: 10px 50px;
+
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-auth-button img{
+    max-width: 100px;
+}
+
+.modal-auth-button[name=discord]{
+    background-color: var(--discord-color);
+}
