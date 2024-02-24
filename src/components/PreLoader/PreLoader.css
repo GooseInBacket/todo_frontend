@@ -1,3 +1,16 @@
+.loadBlock{
+    color: var(--text-color);
+    margin-block: 40px;
+    height: 180px;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
 .preLoader{
     position: absolute;
     width: 100px;
