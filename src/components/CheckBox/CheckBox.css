@@ -25,7 +25,6 @@
     height: 30px;
     border-radius: 2px;
     border: 2px solid var(--accent);
-    overflow: hidden;
 }
 
 .customCheckbox .checkbox .checkmark{
@@ -36,23 +35,19 @@
     max-width: 50%;
     height: auto;
     display: none;
-    overflow: hidden;
 }
 
 .customCheckbox input:checked + .checkbox{
     background-color: var(--accent);
-    overflow: hidden;
 }
 
 .customCheckbox input:checked + .checkbox .checkmark{
     display: block;
-    overflow: hidden;
 }
 
 input:checked ~ span{
     color: var(--done-text-color);
     text-decoration:line-through;
-    overflow: hidden;
 }
 
 label span{
