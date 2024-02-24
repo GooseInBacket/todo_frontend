@@ -1,5 +1,4 @@
 import './Dropdown.css'
-
 import Arrow from './Arrow';
 
 import { useEffect, useRef, useState } from 'react'
@@ -26,9 +25,7 @@ export default function Dropdown({ filterHandler }) {
         };
 
         document.addEventListener('click', handleClick);
-        return () => {
-            document.removeEventListener('click', handleClick);
-        };
+        return () => { document.removeEventListener('click', handleClick); };
     }, [listOpened])
 
     return (
@@ -38,13 +35,12 @@ export default function Dropdown({ filterHandler }) {
                 <Arrow className={listOpened ? 'arrow look-up' : 'arrow'}/>
             </div>
             {
-                listOpened ?
-                    <ul className='selectList open'>
+                listOpened &&
+                    <ul className='selectList'>
                         <li className="filterItem" onClick={chooseFilter}>All</li>
                         <li className="filterItem" onClick={chooseFilter}>Complete</li>
                         <li className="filterItem" onClick={chooseFilter}>Incomplete</li>
                     </ul>
-                : null
             }
         </div>
     )

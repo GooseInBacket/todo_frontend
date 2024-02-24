@@ -27,7 +27,7 @@
 .selectList{
     z-index: 1;
 
-    display: none;
+    display: grid;
     position: absolute;
     top: 40px;
 
@@ -53,17 +53,6 @@
 /* .filter */
 .filter:hover{
     background-color: var(--accent);
-}
-
-/* .theme */
-.theme{
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    background-color: var(--accent);
-
-    display: grid;
-    place-items: center;
 }
 
 .arrow{
