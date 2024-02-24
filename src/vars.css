@@ -13,6 +13,7 @@
 
     --constant-text-color: white;
     --empty-svg-bg: #6C63FF;
+    --discord-color: #5865F2;
 }
 
 [data-theme='dark'] {
@@ -30,4 +31,5 @@
 
     --constant-text-color: white;
     --empty-svg-bg: #27272C;
+    --discord-color: #5865F2;
 }
