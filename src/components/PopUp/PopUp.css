@@ -8,6 +8,14 @@
     place-items: center;
 }
 
+.lettersCounters{
+    margin-top: 5px;
+    
+    color: var(--text-color);
+    font-size: small;
+    display: flex;
+    justify-content: flex-end;
+}
 
 .pop-add-new-task{
     position: absolute;
@@ -38,25 +46,6 @@
 
 .open{
     display: grid;
-}
-
-.button-control{
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    color: var(--constant-text-color);
-    background-color: var(--accent);
-    padding: 10px 22px;
-}
-
-.non-accent{
-    background-color: var(--background);
-    border: 2px solid var(--accent);
-    color: var(--accent);
-}
-
-.non-accent:hover{
-    color: var(--constant-text-color);
 }
 
 @media screen and (max-width: 500px){

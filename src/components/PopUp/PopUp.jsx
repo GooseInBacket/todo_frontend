@@ -2,13 +2,13 @@ import uuid from "react-uuid"
 
 import "./PopUp.css"
 import Input from "../Input/Input"
+import Button from "../Button/Button"
+
 import { useState, useEffect } from "react"
-import ErrorBlock from "../ErrorBlock/ErrorBlock"
 
 
-export default function PopUp({ title, task = {id: uuid(), title: '', completed: false}, submit, close }) {
+export default function PopUp({ title, task = {id: uuid(), title: '', completed: false}, submit, close, onError }) {
     const [inputValue, setInputValue] = useState(task.title)
-    const [errorBlock, setErrorBlock] = useState(false)
 
     useEffect(() => {
         function handleEscapeKey(event) {
@@ -20,7 +20,7 @@ export default function PopUp({ title, task = {id: uuid(), title: '', completed:
     }, [])
 
     function saveInput(){
-        if (inputValue.length <= 3) setErrorBlock(true);
+        if (inputValue.length <= 3) onError('Задача должна быть длиннее 3-х символов');
         else submit({...task, title : inputValue});
 
     }
@@ -38,12 +38,12 @@ export default function PopUp({ title, task = {id: uuid(), title: '', completed:
             <div className='pop-add-new-task'>
                 <h2 className='pop-title'>{ title }</h2>
                 <Input type={'text'} id={'input-task'} placeholder={'Input note...'} value={inputValue} queryHandler={setInputValue} onKeyDown={handlerEnterKey}/>
+                <div className="lettersCounters">{inputValue.length} / 256</div>
                 <div className='pop-control-block'>
-                    <button className='button-control style non-accent' onClick={close}>CANCEL</button>
-                    <button className='button-control style' onClick={saveInput}>APPLY</button>
+                    <Button lightTheme={true} onClick={close}>CANCEL</Button>
+                    <Button onClick={saveInput}>APPLY</Button>
                 </div>
             </div>
-            {errorBlock ? <ErrorBlock onAnimationEnd={setErrorBlock}/> : null}
         </div>
     )
 }
